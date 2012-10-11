@@ -8,13 +8,14 @@
          autoFadeOut: true,
          fadesAfter: 5000,
          fadeInSpeed: 300,
+         fadeOutSpeed:300,
          className: "note",
          relatedEvent: {}
      },
-     add: function(content, options) {
+     add: function(content, config){
          //single var pattern;
          var self = this,
-             options = $.extend(this.defaults, options),
+             options = $.extend({}, this.defaults, config),
              notification, timeoutId, sendTofadeOut, cancelFadeOut, relatedEvent, jRelatedEvent, relatedWidth, relatedHeight, thisHeight, thisWidth, viewPort = {
                  x: $(window).width(),
                  y: $(window).height()
@@ -60,7 +61,7 @@
          notification.css(options.location);
          sendTofadeOut = function(speed) {
              timeoutId = setTimeout(function() {
-                 notify.fadeRemove(notification);
+                 self.fadeRemove(notification, options.fadeOutSpeed);
              }, (speed ? speed : options.fadesAfter));
          };
          cancelFadeOut = function() {
@@ -70,8 +71,8 @@
              sendTofadeOut();
          }
      },
-     fadeRemove: function(id) {
-         id.fadeOut(options.fadeOutSpeed, function() {
+     fadeRemove: function(id, speed) {
+         id.fadeOut(speed, function() {
              id.remove();
          });
      }
