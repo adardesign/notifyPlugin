@@ -27,9 +27,6 @@
          }, function() {
              sendTofadeOut(100);
          });
-         // add "px" to
-         options.location.top = options.location.top + "px";
-         options.location.left = options.location.left + "px";
          // set position
          notification.css(options.location);
          sendTofadeOut = function(speed) {
